@@ -1,0 +1,118 @@
+/* Utilities */
+
+
+
+
+
+/* Navbar */
+
+#user-nav{
+    border-radius: 4px;
+    /* background-color:rgba(0, 0, 0, 0.2); */
+    position: sticky;
+    top: 0;
+}
+
+#user-nav::before{
+    content: "";
+    background-color: rgb(68, 68, 68);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    opacity: 0.4;
+}
+
+
+
+.hover-custom:hover{
+    background-color: white;
+    color: black !important;
+    transform: scale(1.1);
+    box-shadow: 1px 1px #ffffff69;
+}
+
+
+.transition-custom{
+    transition: 0.5s;
+}
+
+.b-radius-custom{
+    border-radius: 7px;
+}
+
+/* Home section */
+
+#home-section{
+    height: 549px;
+}
+
+#home-section::before{
+    content: "";
+    background: url("./pictures/background_img.png") no-repeat center center/cover;
+    position: absolute;
+    height: 700px;
+    width: 100%;
+    z-index: -1;
+    opacity: 0.4;
+}
+
+
+.utilities{
+    /* width: 40%; */
+    flex-basis: 100%;
+    height: auto;
+    border-radius: 10px 0px;
+    background-color: white;
+    box-shadow: -10px -10px 9px -2px  rgb(70 70 70 / 12%), 10px 10px 9px -2px rgb(255 255 255 / 50%);
+    margin: 2rem;
+    text-align: center;
+}
+
+.image-custom{
+    width: 50%;
+    height: 66%;
+}
+
+.paragraph-custom{
+    padding: 10px;
+}
+
+/* .div_sections{
+    display: ;
+} */
+
+
+
+/* buttons */
+
+
+.btn-user{
+
+    border-radius: 4px;
+    background: none;
+    border: 1px solid #7c1aeb;
+    padding: 12px 17px;
+    font-size: medium;
+
+}
+
+
+/* footer */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
