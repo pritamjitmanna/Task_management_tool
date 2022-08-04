@@ -1,0 +1,30 @@
+@media only screen and (max-width:992px) {
+    #home-utility{
+        flex-direction: column;
+    }
+
+
+    .cd-50{
+        width: 100%;
+    }
+
+}
+
+
+@media only screen and (max-width:565px) {
+    
+    .custom-width-inps{
+        width: 100%;
+    }
+
+    #login{
+        padding: 10px;
+    }
+
+    #login-seg{
+        padding: 1rem;
+    }
+
+}
+
+

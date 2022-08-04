@@ -1,8 +1,9 @@
 import React from 'react'
-import '../custom.css'
-import '../phone-custom.css'
+import '../css/custom.css'
+import '../css/phone-custom.css'
 import addTaskPic from '../pictures/project-task-list.jpg'
 import statisticPic from '../pictures/statistics.png'
+import { Link } from "react-router-dom";
 
 
 export default function Home() {
@@ -17,7 +18,7 @@ export default function Home() {
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusantium, ex velit, natus corrupti dolorum atque adipisci optio officia maxime reprehenderit, fuga amet nam! Voluptas quasi omnis dolorum accusamus harum quibusdam?</p>
 
           </div>
-          <button className="btn-user hover-custom transition-custom">Get Started</button>
+          <Link className="btn btn-user hover-custom transition-custom" to="/login" role='button'>Get Started</Link>
       </section>
 
       <section className='container d-flex flex-nowrap justify-content-space-between' id="home-utility">
