@@ -24,8 +24,8 @@ export default function NavBar() {
                 
 
                 <form className="d-flex" role="search">
-                    <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                    <button className="btn btn-outline-light hover-custom transition-custom" type="submit">Search</button>
+                    <input className="form-control" type="search" placeholder="Search" aria-label="Search"/>
+                    <i className="fas fa-search mt-2" style={{fontSize:"1.4rem"}} id="search-btn"></i>
                 </form>
 
                 <Link className="btn btn-outline-light hover-custom transition-custom mx-1 my-1" role='button' to="/login">Sign In</Link>

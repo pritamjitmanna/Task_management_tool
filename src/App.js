@@ -10,17 +10,19 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import Dashboard from './components/Dashboard';
 
 function App() {
   return (
     <div>
       <Router>
         <NavBar/>
-        <Routes>
+        {/* <Routes>
             <Route path="/" element={<Home />}/>
             <Route path="/login" element={<Login />}/>
             <Route path="/register" element={<Register />}/>
-        </Routes>
+        </Routes> */}
+        <Dashboard/>
         <Footer/>
       </Router>
       
