@@ -2,12 +2,17 @@ import React from 'react'
 import '../css/custom.css'
 import '../css/phone-custom.css'
 import { Link } from "react-router-dom";
+import PointNavigation from './PointNavigation';
 
 
 export default function Register() {
+
+
   return (
+    <>
+    <PointNavigation link1={"login"} link2={"register"}/>
     <section id='login'>
-        <div className="container border border-success mt-3 cd-50 center" id='login-seg'>
+        <div className="container border border-success cd-50 center" id='login-seg'>
             
             <div className='.login-seg-1'>
                 <form >
@@ -32,5 +37,7 @@ export default function Register() {
             
         </div>
     </section>
+
+    </>
   )
 }

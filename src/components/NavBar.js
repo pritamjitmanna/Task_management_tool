@@ -19,6 +19,9 @@ export default function NavBar() {
                     <li className="nav-item">
                         <Link className="nav-link active hover-custom transition-custom py-1 b-radius-custom mx-1" aria-current="page" to="/">About</Link>
                     </li>
+                    <li className="nav-item">
+                        <Link className="nav-link active hover-custom transition-custom py-1 b-radius-custom mx-1" aria-current="page" to="/dashboard">Dashboard</Link>
+                    </li>
                     
                 </ul>
                 

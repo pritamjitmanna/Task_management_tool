@@ -15,6 +15,31 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     width: 80%;
 }
 
+.hover-custom:hover{
+    background-color: white;
+    color: black !important;
+    transform: scale(1.1);
+    box-shadow: 1px 1px #ffffff69;
+}
+
+
+.transition-custom{
+    transition: 0.5s;
+}
+
+.b-radius-custom{
+    border-radius: 7px;
+}
+
+.image-custom{
+    width: 50%;
+    height: 66%;
+}
+
+.paragraph-custom{
+    padding: 10px;
+}
+
 ::-webkit-scrollbar{
     height: 5px;
     width: 5px;
@@ -23,6 +48,12 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 ::-webkit-scrollbar-track,::-webkit-scrollbar-thumb{
     box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 }
+
+.dropdown-menu{
+    min-width: 20px !important;
+}
+
+
 
 
 
@@ -48,21 +79,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 
 
 
-.hover-custom:hover{
-    background-color: white;
-    color: black !important;
-    transform: scale(1.1);
-    box-shadow: 1px 1px #ffffff69;
-}
 
-
-.transition-custom{
-    transition: 0.5s;
-}
-
-.b-radius-custom{
-    border-radius: 7px;
-}
 
 /* Home section */
 
@@ -92,18 +109,6 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     text-align: center;
 }
 
-.image-custom{
-    width: 50%;
-    height: 66%;
-}
-
-.paragraph-custom{
-    padding: 10px;
-}
-
-/* .div_sections{
-    display: ;
-} */
 
 
 
@@ -133,7 +138,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     height: 600px;
     width: 100vw;
     background-color: gray;
-    padding: 30px;
+    padding: 0 30px;
 }
 
 .custom-width-inps{
@@ -165,10 +170,6 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 
 
 
-
-
-
-
 /* taskList */
 
 
@@ -186,26 +187,26 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 }
 
 
-
-
 .table-header{
+    background-color: rgb(214 209 209);
+    border-radius: 10px 10px 0 0;
+
+}
+
+
+
+.table-header-1{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    background-color: rgb(214 209 209);
+    padding: 20px 20px 0px 20px;
     flex-wrap: wrap;
-    border-radius: 10px 10px 0 0;
 }
 
-.table-header p{
+.table-header-1 p{
     color: black;
 }
 
-.add-new{
-
-    transition: 0.5s;
-}
 
 .add-task{
     padding: 10px 20px;
@@ -219,6 +220,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 .table-section{
     height: 650px;
     overflow: auto;
+
 }
 
 .actual-table{
@@ -237,7 +239,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 
 .actual-table th,td{
     border-bottom: 1px solid #dddddd;
-    padding: 10px 20px;
+    padding: 10px 3px;
     word-break: break-all;
     text-align: center;
 }
@@ -248,11 +250,17 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     background-color: #f6f9fc;
 }
 
+.actual-table tr{
+    width: 110%;
+}
+
+
+
 .actual-table thead th:nth-child(1),td:nth-child(1){
-    width: 10%;
+    width: 5%;
 }
 .actual-table thead th:nth-child(2),td:nth-child(2){
-    width: 10%;
+    width: 14%;
 }
 .actual-table thead th:nth-child(3),td:nth-child(3){
     width: 60%;
@@ -261,8 +269,9 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     width: 10%;
 }
 .actual-table thead th:nth-child(5),td:nth-child(5){
-    width: 10%;
+    width: 1%;
 }
+
 
 .actual-table td button:nth-child(1){
     background-color: #0298cf;
@@ -299,3 +308,26 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 
 
 
+
+
+/* point navigation */
+
+.navigation{
+    display: flex;
+    justify-content: center;
+}
+
+.navigation a{
+    padding: 12px 24px;
+    text-decoration: none;
+    border-top: 4px solid transparent;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+}
+
+.active-navigation{
+    border-top: 4px solid rgb(88 163 238 / 63%) !important;
+    border-left: 1px solid rgb(88 163 238 / 63%) !important;
+    border-right: 1px solid rgb(88 163 238 / 63%) !important;
+    border-radius: 50% 50% 0 0;
+}

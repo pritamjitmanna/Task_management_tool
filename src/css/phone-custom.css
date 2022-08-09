@@ -36,13 +36,13 @@
         width: 15%;
     }
     .actual-table thead th:nth-child(3),td:nth-child(3){
-        width: 40%;
+        width: 52%;
     }
     .actual-table thead th:nth-child(4),td:nth-child(4){
         width: 15%;
     }
     .actual-table thead th:nth-child(5),td:nth-child(5){
-        width: 15%;
+        width: 3%;
     }
 }
 
@@ -53,6 +53,12 @@
     .actual-table thead{
         display: none;
     }
+
+    .actual-table th,td{
+        padding: 10px 15px;
+    }
+
+    
 
     .actual-table, .actual-table tbody,.actual-table tr,.actual-table td{
         display: block;
@@ -85,6 +91,13 @@
 
     .actual-table tbody td[name='S No']{
         display: none;
+    }
+
+
+    .dropdown-menu{
+        inset: inherit !important;
+        right: 0px !important;
+        transform: inherit !important;
     }
 
 }

@@ -10,9 +10,15 @@ export default function Taskcard(props) {
         <td name='Title'>{props.title}</td>
         <td name='Description'>{props.description}</td>
         <td name='Due Date'>{props.due_date}</td>
-        <td name='Action'>
-          <button className=''><i className="far fa-edit"></i></button>
-          <button className=''><i className="fas fa-trash-alt"></i></button>
+        <td className="dropdown">
+          <a className="nav-link dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <i className="fas fa-ellipsis-v"></i>
+          </a>
+          <ul className="dropdown-menu">
+            <li><a className="dropdown-item" role='button' href="#"><i className="far fa-edit"></i></a></li>
+            <li><a className="dropdown-item" role='button' href="#"><i className="fas fa-trash-alt"></i></a></li>
+            <li><a className="dropdown-item" role='button' href="#"><i className="far fa-star"></i></a></li>
+          </ul>
         </td>
     </tr>
   )

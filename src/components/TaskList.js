@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Taskcard from './Taskcard'
 import '../css/custom.css'
 import '../css/phone-custom.css'
+import PointNavigation from './PointNavigation'
+import AddTask from './AddTask'
 
 export default function TaskList() {
 
@@ -78,14 +80,29 @@ export default function TaskList() {
         }
     ]
 
+
+    const [addTaskVis, setaddTaskVis] = useState('none')
+
+
+
+    const handleAddClick=()=>{
+        if(addTaskVis==='none')setaddTaskVis('block')
+        else setaddTaskVis('none')
+    }
+
   return (
+    <>
+    <PointNavigation link1={"dashboard"} link2={"overview"}/>
     <div style={{margin:'auto'}} className='cd-80' >
         <div className="table">
             <div className="table-header">
-                <p>TaskList</p>
-                <div>
-                    <button className="btn-user hover-custom add-new">+ Add New</button>
+                <div className="table-header-1">
+                    <p>TaskList</p>
+                    <div>
+                        <button className="btn-user hover-custom transition-custom" onClick={handleAddClick}>+ Add New</button>
+                    </div>
                 </div>
+                <AddTask addTaskVis={addTaskVis}/>
             </div>
             <div className="table-section">
                 <table className='actual-table'>
@@ -95,7 +112,7 @@ export default function TaskList() {
                             <th >Title</th>
                             <th >Description</th>
                             <th >Due Date</th>
-                            <th >Action</th>
+                            <th></th>
 
                         </tr>
                     </thead>
@@ -116,5 +133,6 @@ export default function TaskList() {
             </div>
         </div>
     </div>
+    </>
   )
 }
