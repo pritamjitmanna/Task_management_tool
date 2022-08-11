@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
-    <div>
+    <div style={{overflow:'hidden'}}>
 
    
       <section className='d-flex flex-column text-center justify-content-center align-items-center w-2' id='home-section'>
@@ -22,14 +22,14 @@ export default function Home() {
       </section>
 
       <section className='container d-flex flex-nowrap justify-content-space-between' id="home-utility">
-        <div className='d-flex flex-column p-2 align-items-center utilities rounded-4'>
+        <div className='d-flex flex-column p-2 align-items-center utilities rounded-4' id='home-left-sec'>
             <img src={addTaskPic} alt="Add and Complete Task" className='image-custom'/>
             <p className='paragraph-custom'>
               Add your task on the go and never forget about about it. Complete your important tasks, also marking them. 
               Other features makes it easier for you. 
             </p>
         </div>
-        <div className='d-flex flex-column p-2 align-items-center utilities rounded-4'>
+        <div className='d-flex flex-column p-2 align-items-center utilities rounded-4' id='home-right-sec'>
             <img src={statisticPic} alt="Add and Complete Task" className='image-custom'/>
             <p className='paragraph-custom'>
               Move to Statistics section to know about your daily, monthly activities and know how much you can do better.
