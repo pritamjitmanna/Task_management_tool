@@ -6,10 +6,10 @@ export default function Taskcard(props) {
 
   return (
     <tr>
-        <td name='S No'>{props.index}</td>
+        <td name='SNo'>{props.index}</td>
         <td name='Title'>{props.title}</td>
         <td name='Description'>{props.description}</td>
-        <td name='Due Date'>{props.due_date}</td>
+        <td name='DueDate'>{props.due_date}</td>
         <td className="dropdown">
           <a className="nav-link dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           <i className="fas fa-ellipsis-v"></i>
