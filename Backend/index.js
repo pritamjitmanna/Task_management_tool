@@ -19,7 +19,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 
 app.use('/users',require('./Routes/authentication'))
-app.use('/notes',require('./Routes/apiNotes'))
+app.use('/tasks',require('./Routes/apiTasks'))
 
 
 app.listen(PORT,()=>console.log(`Listening at http://${HTTP}:${PORT}`))

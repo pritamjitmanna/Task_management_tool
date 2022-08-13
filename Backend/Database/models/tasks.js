@@ -1,6 +1,6 @@
 const mongoose=require('mongoose')
 
-const Notes=new mongoose.Schema({
+const Tasks=new mongoose.Schema({
     user:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'user'
@@ -21,6 +21,6 @@ const Notes=new mongoose.Schema({
     }
 })
 
-const notes=mongoose.model('user',Notes)
+const tasks=mongoose.model('task',Tasks)
 
-module.exports=notes;
+module.exports=tasks;
