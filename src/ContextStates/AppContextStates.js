@@ -7,11 +7,41 @@ const ContextStates=(props)=>{
 
     let host="http://localhost:5000"
 
+    const [isLogin, setisLogin] = useState(false)
+
+    const [alert, setalert] = useState({
+        isAlert:false,
+        type:"danger",
+        message:"shdfkjdhfk"
+    })
+
+
+    // Requirements
 
     const capitalise=(word)=>{
         if(word.length===1)return word.toUpperCase();
         return word.charAt(0).toUpperCase()+word.substr(1,word.length-1);
     }
+
+    const showAlert=(type,message)=>{
+        setalert({
+            isAlert:true,
+            type,message
+        })
+
+        setTimeout(() => {
+            setalert({
+                ...alert,
+                isAlert:false
+            })
+        }, 2000);
+    }
+
+
+
+
+
+
 
     const RegisterUser=async(username,email,password)=>{
 
@@ -50,7 +80,7 @@ const ContextStates=(props)=>{
 
 
     return(
-        <AppContext.Provider value={{capitalise,RegisterUser}}>
+        <AppContext.Provider value={{capitalise,RegisterUser,isLogin,setisLogin,alert,setalert,showAlert,LoginUser}}>
             {props.children}
         </AppContext.Provider>
     )

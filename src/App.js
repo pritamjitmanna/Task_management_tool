@@ -4,7 +4,6 @@ import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Login from './components/Login';
 import Register from './components/Register';
-import ContextStates from './ContextStates/AppContextStates';
 
 import {
   BrowserRouter as Router,
@@ -13,13 +12,20 @@ import {
 } from "react-router-dom";
 import Dashboard from './components/Dashboard';
 import Analytics from './components/Analytics';
+import Alert from './components/Alert';
+import { useContext } from 'react';
+import AppContext from './ContextStates/AppContext';
 
 function App() {
+
+  const {alert} = useContext(AppContext)
+
+
   return (
     <div>
-      <ContextStates>
         <Router>
           <NavBar/>
+          <Alert type={alert.type} message={alert.message}/>
           <Routes>
               <Route path="/" element={<Home />}/>
               <Route path="/login" element={<Login />}/>
@@ -31,7 +37,6 @@ function App() {
           
           <Footer/>
         </Router>
-      </ContextStates>
       
       
     </div>

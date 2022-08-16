@@ -1,7 +1,7 @@
 import React from 'react'
 import '../css/custom.css'
 import '../css/phone-custom.css'
-import { Link } from "react-router-dom";
+import { Link,  useNavigate } from "react-router-dom";
 import PointNavigation from './PointNavigation';
 import { useContext } from 'react';
 import AppContext from '../ContextStates/AppContext';
@@ -11,9 +11,14 @@ import { useState } from 'react';
 export default function Register() {
 
 
-    const {RegisterUser} = useContext(AppContext)
+    const {RegisterUser,setisLogin,showAlert} = useContext(AppContext)
+    const navigate=useNavigate()
 
     const [credentials, setcredentials] = useState({username:"",email:"",password:""});
+    const [passwordReq, setpasswordReq] = useState({
+        Type:"password",
+        icon:""
+    })
 
     const handleClickReg=async (e)=>{
 
@@ -23,12 +28,38 @@ export default function Register() {
 
         if(response.success){
 
-            localStorage.setItem('jwt_token',JSON.stringify(response.user.jwt_token))
+            localStorage.setItem('jwt_token',response.user.jwt_token)
+            setisLogin(true)
+            
+            navigate('/dashboard')
+            showAlert('success',"Successfully Registered")
+            setcredentials({username:"",email:"",password:""})
+
+        }
+        else{
+            showAlert('danger',response.errors[0])
         }
     }
 
     const onchange=(e)=>{
         setcredentials({...credentials,[e.target.name]:e.target.value})
+    }
+
+
+    const handlePass=()=>{
+        if(passwordReq.Type=='password'){
+            setpasswordReq({
+                Type:'text',
+                icon:"-slash"
+            })
+        }
+        else{
+            setpasswordReq({
+                Type:'password',
+                icon:""
+            })
+        }
+        
     }
 
 
@@ -42,16 +73,19 @@ export default function Register() {
                 <form onSubmit={handleClickReg}>
                     <div className="mb-3 custom-width-inps">
                         <label htmlFor="username" className="form-label">Username</label>
-                        <input type="name" className="form-control" id="username" name='username' aria-describedby="emailHelp" placeholder='Enter Your Username' onChange={onchange}/>
+                        <input type="name" className="form-control" id="username" name='username' aria-describedby="emailHelp" placeholder='Enter Your Username' onChange={onchange} required minLength={5}/>
                     </div>
                     <div className="mb-3 custom-width-inps">
                         <label htmlFor="email" className="form-label">Email address</label>
                         <input type="email" className="form-control" id="email" name='email' aria-describedby="emailHelp" placeholder='Enter Your Email' onChange={onchange}/>
                         <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
                     </div>
-                    <div className="mb-3 custom-width-inps">
-                        <label htmlFor="password" className="form-label">Password</label>
-                        <input type="password" name='password' className="form-control" id="password" placeholder='Enter Your Password' onChange={onchange}/>
+                    <div className="d-flex">
+                        <div className="mb-3 custom-width-inps">
+                            <label htmlFor="password" className="form-label">Password</label>
+                            <input type={passwordReq.Type} name='password' className="form-control" id="password" placeholder='Enter Your Password' onChange={onchange} required minLength={4}/>
+                        </div>
+                        <i class={`fas fa-eye${passwordReq.icon}`} style={{position: "relative",top: "43px",right: "28px"}} onClick={handlePass}></i>
                     </div>
                     <button type="submit" className="btn-user hover-custom transition-custom">Register</button>
                 </form>
