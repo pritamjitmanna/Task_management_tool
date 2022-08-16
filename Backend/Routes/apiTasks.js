@@ -27,6 +27,8 @@ router.post('/addtask',fetchuser,[
             title,description,DueDate
         })
 
+        // console.log(req.user.id);
+
         res.status(200).json({success:true,task})
     } catch (error) {
         res.status(500).send({success:false,errors:["Internal Server Error"]})
@@ -117,10 +119,45 @@ router.delete('/deletetask/:id',fetchuser,async(req,res)=>{
 
 // ROUTE 4: FETCH ALL TASKS OF USER http://localhost:5000/tasks/fetchtasks  Login Required
 
-router.get('/fetchtasks',fetchuser,(req,res)=>{
+router.get('/fetchtasks',fetchuser,async(req,res)=>{
     
+    try {
+        
+        let user_tasks=await Tasks.find({user:req.user.id});
+
+        // console.log(req.user.id);
+
+        res.status(200).json({success:true,user_tasks})
+
+
+    } catch (error) {
+        res.status(500).send({success:false,errors:["Internal Server Error"]})
+    }
+
+
+
 })
 
+
+// ROUTE 5:STAR A TASK http://localhost:5000/tasks/startask/:id Login Required
+
+router.put('/startask/:id',fetchuser,async(req,res)=>{
+
+    try {
+
+        let task=await Tasks.findById(req.params.id)
+        
+        task.starred=!task.starred;
+
+        task.save();
+
+        res.status(200).json(task)
+
+    } catch (error) {
+        res.status(500).send({success:false,errors:["Internal Server Error"]})
+    }
+
+})
 
 
 

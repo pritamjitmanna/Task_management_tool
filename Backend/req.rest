@@ -1,4 +1,8 @@
 ###
+
+
+# Register a user
+
 POST  http://localhost:5000/users/register
 Content-Type: application/json
 
@@ -11,6 +15,9 @@ Content-Type: application/json
 
 ###
 
+
+# Login 
+
 POST http://localhost:5000/users/login
 Content-Type: application/json
 
@@ -22,24 +29,33 @@ Content-Type: application/json
 
 ###
 
+
+# FetchUser Details
+
 GET http://localhost:5000/users/fetchuser
 jwt_token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJmNjgxOTQ1N2JiMzBiYjAyY2MzMWU0In0sImR0IjoiYWRzcyIsImlhdCI6MTY2MDMyMjE5Nn0.odQPbla8xI2VFj36Fe6oaDM4PUp2-RJ94kZDhrsfuRY
 
 
 ###
 
+
+# Add Task
+
 POST http://localhost:5000/tasks/addtask
 Content-Type: application/json
-jwt_token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJmNjgxOTQ1N2JiMzBiYjAyY2MzMWU0In0sImlhdCI6MTY2MDQwNjM3NH0.JUceK8NygE107MkKdSYh_pvmOWGSmDlIA6QrVkvXU1E
+jwt_token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJmNjgzZjU3N2U0MWU3MTdmZTQ2ZDhiIn0sImlhdCI6MTY2MDU3MzY2OH0.BubuMv9NHVS2rWwHElk9CFNnhEYFiOCrlkQPK81C4V0
 
 {
-    "title":"My First Task",
+    "title":"My First Taskttee",
     "description":"I have to complete it",
     "DueDate":"2020-12-15"
 }
 
 
 ###
+
+
+# Update Task
 
 PUT http://localhost:5000/tasks/updatetask/62f7cb0e831b554520cf860f
 Content-Type: application/json
@@ -54,5 +70,24 @@ jwt_token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJmNjgxOTQ1N
 
 ###
 
+# Delete A task
+
 DELETE http://localhost:5000/tasks/deletetask/62f7cb0e831b554520cf860f
 jwt_token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJmNjgxOTQ1N2JiMzBiYjAyY2MzMWU0In0sImR0IjoiYWRzcyIsImlhdCI6MTY2MDMyMjE5Nn0.odQPbla8xI2VFj36Fe6oaDM4PUp2-RJ94kZDhrsfuRY
+
+
+###
+
+# Fetch Tasks
+
+GET http://localhost:5000/tasks/fetchtasks
+jwt_token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJmNjgzZjU3N2U0MWU3MTdmZTQ2ZDhiIn0sImlhdCI6MTY2MDU3MzY2OH0.BubuMv9NHVS2rWwHElk9CFNnhEYFiOCrlkQPK81C4V0
+
+
+###
+
+# Star a Task
+
+PUT http://localhost:5000/tasks/startask/62fa685a5b16143a8171556f
+Content-Length: 0
+jwt_token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJmNjgzZjU3N2U0MWU3MTdmZTQ2ZDhiIn0sImlhdCI6MTY2MDU3MzY2OH0.BubuMv9NHVS2rWwHElk9CFNnhEYFiOCrlkQPK81C4V0

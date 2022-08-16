@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const mongoD=require('./Database/mongo')
 const User=require('./Database/models/userData')
+const cors=require('cors')
 
 // Necessary constants
 
@@ -14,6 +15,7 @@ mongoD();
 
 
 // Requirements
+app.use(cors())
 
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))

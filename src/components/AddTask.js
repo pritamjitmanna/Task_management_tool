@@ -16,7 +16,7 @@ export default function AddTask(props) {
 
   return (
     <div style={{display:`${props.addTaskVis}`}}>
-        <div className="row g-3 flex-wrap">
+        <form className="row g-3 flex-wrap">
             <div className="col-sm">
                 <input type="text" className="form-control" placeholder="Enter Title" aria-label="First name"/>
             </div>
@@ -29,7 +29,7 @@ export default function AddTask(props) {
             <div className="col-sm text-center">
                 <button className="btn btn-primary w-100">Add</button>
             </div>
-        </div>
+        </form>
     </div>
   )
 }

@@ -58,9 +58,9 @@ router.post("/register",[
       })
 
 
-      let jwt_token=jwt_auth(user);
+      user=jwt_auth(user);
 
-      res.status(200).send({success:true,jwt_token});
+      res.status(200).send({success:true,user});
     }
     catch(e){
       res.status(500).send({success:false,errors:["Internal Server Error"]})
@@ -97,7 +97,7 @@ router.post('/login',[
 
       let jwt_token=jwt_auth(user);
 
-      console.log(user);
+      // console.log(user);
 
       return res.status(200).send({success:true,jwt_token});
 

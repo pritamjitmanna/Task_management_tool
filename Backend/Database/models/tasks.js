@@ -15,6 +15,10 @@ const Tasks=new mongoose.Schema({
     DueDate:{
         type:Date
     },
+    starred:{
+        type:Boolean,
+        default:false
+    },
     addDate:{
         type:Date,
         default:Date.now
