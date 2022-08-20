@@ -73,17 +73,17 @@ export default function Register() {
                 <form onSubmit={handleClickReg}>
                     <div className="mb-3 custom-width-inps">
                         <label htmlFor="username" className="form-label">Username</label>
-                        <input type="name" className="form-control" id="username" name='username' aria-describedby="emailHelp" placeholder='Enter Your Username' onChange={onchange} required minLength={5}/>
+                        <input type="name" className="form-control" id="username" value={credentials.username} name='username' aria-describedby="emailHelp" placeholder='Enter Your Username' onChange={onchange} required minLength={5}/>
                     </div>
                     <div className="mb-3 custom-width-inps">
                         <label htmlFor="email" className="form-label">Email address</label>
-                        <input type="email" className="form-control" id="email" name='email' aria-describedby="emailHelp" placeholder='Enter Your Email' onChange={onchange}/>
+                        <input type="email" className="form-control" id="email" value={credentials.email} name='email' aria-describedby="emailHelp" placeholder='Enter Your Email' onChange={onchange}/>
                         <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
                     </div>
                     <div className="d-flex">
                         <div className="mb-3 custom-width-inps">
                             <label htmlFor="password" className="form-label">Password</label>
-                            <input type={passwordReq.Type} name='password' className="form-control" id="password" placeholder='Enter Your Password' onChange={onchange} required minLength={4}/>
+                            <input type={passwordReq.Type} name='password' value={credentials.password} className="form-control" id="password" placeholder='Enter Your Password' onChange={onchange} required minLength={4}/>
                         </div>
                         <i class={`fas fa-eye${passwordReq.icon}`} style={{position: "relative",top: "43px",right: "28px"}} onClick={handlePass}></i>
                     </div>

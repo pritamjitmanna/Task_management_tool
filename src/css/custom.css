@@ -54,6 +54,10 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 }
 
 
+.starred{
+    background: radial-gradient(yellow 50%, transparent 50%);
+}
+
 
 
 
@@ -287,10 +291,10 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     width: 14%;
 }
 .actual-table thead th:nth-child(3),td:nth-child(3){
-    width: 60%;
+    width: 50%;
 }
 .actual-table thead th:nth-child(4),td:nth-child(4){
-    width: 10%;
+    width: 20%;
 }
 .actual-table thead th:nth-child(5),td:nth-child(5){
     width: 1%;

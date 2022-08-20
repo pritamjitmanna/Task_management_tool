@@ -11,7 +11,7 @@ const router=express.Router();
 
 router.post('/addtask',fetchuser,[
     body('title',"Must be atleast 5 characters").isLength({min:5}),
-    body('DueDate',"Must be a valid Date").isDate()
+    // body('DueDate',"Must be a valid Date").isDate()
 ],async(req,res)=>{
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -27,11 +27,13 @@ router.post('/addtask',fetchuser,[
             title,description,DueDate
         })
 
+        // console.log(task);
+
         // console.log(req.user.id);
 
         res.status(200).json({success:true,task})
     } catch (error) {
-        res.status(500).send({success:false,errors:["Internal Server Error"]})
+        res.status(500).send({success:false,errors:[{msg:"Internal Server Error"}]})
     }
 
     
@@ -43,7 +45,7 @@ router.post('/addtask',fetchuser,[
 
 router.put('/updatetask/:id',fetchuser,[
     body('title',"Must be atleast 5 characters").isLength({min:5}),
-    body('DueDate',"Must be a valid Date").isDate()
+    // body('DueDate',"Must be a valid Date").isDate()
 ],async(req,res)=>{
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -58,13 +60,13 @@ router.put('/updatetask/:id',fetchuser,[
 
         //If No task is found
 
-        if(!task)return res.status(400).json({success:false,errors:["Wrong credentials"]})
+        if(!task)return res.status(400).json({success:false,errors:[{msg:"Wrong credentials"}]})
 
         //If wrong user is changing the task
 
         // console.log(req.user.id);
 
-        if(task.user.toString()!=req.user.id)return res.status(400).json({success:false,errors:["Wrong credentials"]})
+        if(task.user.toString()!=req.user.id)return res.status(400).json({success:false,errors:[{msg:"Wrong credentials"}]})
 
         let updateTask={
             title:req.body.title,
@@ -76,7 +78,7 @@ router.put('/updatetask/:id',fetchuser,[
 
         res.status(200).json({success:true,task})
     } catch (error) {
-        res.status(500).send({success:false,errors:["Internal Server Error"]})
+        res.status(500).send({success:false,errors:[{msg:"Internal Server Error"}]})
     }
 
 
@@ -86,10 +88,6 @@ router.put('/updatetask/:id',fetchuser,[
 // ROUTE 3: DELETE A TASK AT http://localhost:5000/tasks/deletetask/:id  //Login Required
 
 router.delete('/deletetask/:id',fetchuser,async(req,res)=>{
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({success:false, errors: errors.array() });
-    }
 
     try {
 
@@ -99,19 +97,19 @@ router.delete('/deletetask/:id',fetchuser,async(req,res)=>{
 
         //If No task is found
 
-        if(!task)return res.status(400).json({success:false,errors:["Wrong credentials"]})
+        if(!task)return res.status(400).json({success:false,errors:[{msg:"Wrong credentials"}]})
 
         //If wrong user is changing the task
 
 
-        if(task.user.toString()!=req.user.id)return res.status(400).json({success:false,errors:["Wrong credentials"]})
+        if(task.user.toString()!=req.user.id)return res.status(400).json({success:false,errors:[{msg:"Wrong credentials"}]})
 
 
         task=await Tasks.findByIdAndDelete(taskId)
 
         res.status(200).json({success:true,task})
     } catch (error) {
-        res.status(500).send({success:false,errors:["Internal Server Error"]})
+        res.status(500).send({success:false,errors:[{msg:"Internal Server Error"}]})
     }
 
 
@@ -131,7 +129,7 @@ router.get('/fetchtasks',fetchuser,async(req,res)=>{
 
 
     } catch (error) {
-        res.status(500).send({success:false,errors:["Internal Server Error"]})
+        res.status(500).send({success:false,errors:[{msg:"Internal Server Error"}]})
     }
 
 
@@ -151,10 +149,10 @@ router.put('/startask/:id',fetchuser,async(req,res)=>{
 
         task.save();
 
-        res.status(200).json(task)
+        res.status(200).json({success:true,task})
 
     } catch (error) {
-        res.status(500).send({success:false,errors:["Internal Server Error"]})
+        res.status(500).send({success:false,errors:[{msg:"Internal Server Error"}]})
     }
 
 })

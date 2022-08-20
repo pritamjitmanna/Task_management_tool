@@ -27,6 +27,7 @@ export default function Login() {
         let response=await LoginUser(credentials.email,credentials.password)
 
         if(response.success){
+            localStorage.setItem('jwt_token',response.user.jwt_token)
             setisLogin(true)
             
             navigate('/dashboard')
@@ -68,15 +69,15 @@ export default function Login() {
                     <form onSubmit={handleLogin}>
                         <div className="mb-3 custom-width-inps">
                             <label htmlFor="email" className="form-label">Email address</label>
-                            <input type="email" className="form-control" id="email" name='email' aria-describedby="emailHelp" placeholder='Enter Your Email' onChange={onchange}/>
+                            <input type="email" className="form-control" id="email" name='email' value={credentials.email} aria-describedby="emailHelp" placeholder='Enter Your Email' onChange={onchange}/>
                             <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
                         </div>
                         <div className="d-flex">
                             <div className="mb-3 custom-width-inps">
                                 <label htmlFor="password" className="form-label">Password</label>
-                                <input type={passwordReq.Type} name='password' className="form-control" id="password" placeholder='Enter Your Password' onChange={onchange} required minLength={4}/>
+                                <input type={passwordReq.Type} name='password' value={credentials.password} className="form-control" id="password" placeholder='Enter Your Password' onChange={onchange} required minLength={4}/>
                             </div>
-                            <i class={`fas fa-eye${passwordReq.icon}`} style={{position: "relative",top: "43px",right: "28px"}} onClick={handlePass}></i>
+                            <i className={`fas fa-eye${passwordReq.icon}`} style={{position: "relative",top: "43px",right: "28px"}} onClick={handlePass}></i>
                         </div>
                         <button type="submit" className="btn-user hover-custom transition-custom">Login</button>
                     </form>

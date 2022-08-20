@@ -78,6 +78,8 @@
         position: relative;
     }
 
+    
+
     .actual-table td:before{
         content: attr(name);
         position: absolute;
@@ -87,6 +89,10 @@
         font-weight: 600;
         text-align: left;
 
+    }
+
+    .editOp{
+        padding-left: 10px !important;
     }
 
     .actual-table tbody td[name='S No']{

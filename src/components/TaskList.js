@@ -4,84 +4,19 @@ import '../css/custom.css'
 import '../css/phone-custom.css'
 import PointNavigation from './PointNavigation'
 import AddTask from './AddTask'
+import { useEffect } from 'react'
+import { useContext } from 'react'
+import AppContext from '../ContextStates/AppContext'
 
 export default function TaskList() {
 
-    let tasks=[
-        {
-            title:"Head",
-            description:"To complete",
-            due_date:"Friday",
-        }
-        ,{
-            title:"Head",
-            description:"To complete",
-            due_date:"Friday",
-        }
-        ,{
-            title:"Head",
-            description:"To complete",
-            due_date:"Friday",
-        }
-        ,{
-            title:"Head",
-            description:"To complete",
-            due_date:"Friday",
-        }
-        ,{
-            title:"Head",
-            description:"To complete",
-            due_date:"Friday",
-        }
-        ,{
-            title:"Head",
-            description:"To complete",
-            due_date:"Friday",
-        }
-        ,{
-            title:"Head",
-            description:"To complete",
-            due_date:"Friday",
-        }
-        ,{
-            title:"Head",
-            description:"To complete",
-            due_date:"Friday",
-        }
-        ,{
-            title:"Head",
-            description:"To complete",
-            due_date:"Friday",
-        }
-        ,{
-            title:"Head",
-            description:"To complete",
-            due_date:"Friday",
-        }
-        ,{
-            title:"Head",
-            description:"To complete",
-            due_date:"Friday",
-        }
-        ,{
-            title:"Head",
-            description:"To complete",
-            due_date:"Friday",
-        }
-        ,{
-            title:"Head",
-            description:"To complete",
-            due_date:"Friday",
-        }
-        ,{
-            title:"Head",
-            description:"To complete",
-            due_date:"Friday",
-        }
-    ]
+    const {FetchTasks,tasks} = useContext(AppContext)
+
 
 
     const [addTaskVis, setaddTaskVis] = useState('none')
+
+    
 
 
 
@@ -89,6 +24,12 @@ export default function TaskList() {
         if(addTaskVis==='none')setaddTaskVis('block')
         else setaddTaskVis('none')
     }
+
+    useEffect(() => {
+      FetchTasks()
+    // eslint-disable-next-line
+    }, [])
+    
 
   return (
     <>
@@ -102,10 +43,14 @@ export default function TaskList() {
                         <button className="btn-user hover-custom transition-custom" onClick={handleAddClick}>+ Add New</button>
                     </div>
                 </div>
-                <AddTask addTaskVis={addTaskVis}/>
+                <AddTask addTaskVis={addTaskVis} inputValues={{
+                    title:"",
+                    description:"",
+                    DueDate:""
+                }} isEdit={false}/>
             </div>
             <div className="table-section">
-                <table className='actual-table'>
+                {tasks.length?<table className='actual-table'>
                     <thead>
                         <tr>
                             <th >S No</th>
@@ -117,11 +62,26 @@ export default function TaskList() {
                         </tr>
                     </thead>
                     <tbody>
+                        <tr>
+                            <td colSpan={5}>Important</td>
+                        </tr>
+                    </tbody>
+                    <tbody>
                         {tasks.map((element,index)=>{
-                            return <Taskcard key={index} index={index+1} title={element.title} description={element.description} due_date={element.due_date}/>
+                            if(element.starred)return <Taskcard key={element._id} id={element._id} starred={element.starred} index={index+1} title={element.title} description={element.description} due_date={element.DueDate}/>
                         })}
                     </tbody>
-                </table>
+                    <tbody>
+                        <tr>
+                            <td colSpan={5}>All</td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        {tasks.map((element,index)=>{
+                            return <Taskcard key={element._id} id={element._id} starred={element.starred} index={index+1} title={element.title} description={element.description} due_date={element.DueDate}/>
+                        })}
+                    </tbody>
+                </table>:"Add Your task to show"}
             </div>
             <div className="pagination">
                 <div><i className="fas fa-angle-double-left"></i></div>
