@@ -13,12 +13,22 @@ import {
 import Dashboard from './components/Dashboard';
 import Analytics from './components/Analytics';
 import Alert from './components/Alert';
-import { useContext } from 'react';
+import { useContext,useEffect } from 'react';
 import AppContext from './ContextStates/AppContext';
 
 function App() {
 
-  const {alert} = useContext(AppContext)
+  const {alert,setisLogin} = useContext(AppContext)
+
+  useEffect(() => {
+      
+    if(localStorage.getItem('jwt_token')!==null)setisLogin({
+      iS:true,
+      username:localStorage.getItem('username')
+    })
+
+    // eslint-disable-next-line
+  }, [])
 
 
   return (

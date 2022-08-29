@@ -1,5 +1,15 @@
 const mongoose=require('mongoose')
 
+function convertUTCDateToLocalDate(date) {
+    var newDate = new Date(date.getTime()-date.getTimezoneOffset()*60*1000);
+    console.log(newDate);
+
+    return newDate;   
+}
+
+
+
+
 const Tasks=new mongoose.Schema({
     user:{
         type:mongoose.Schema.Types.ObjectId,

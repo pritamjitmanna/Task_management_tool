@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useState } from 'react';
 import AppContext from './AppContext'
 
@@ -7,14 +8,20 @@ const ContextStates=(props)=>{
 
     let host="http://localhost:5000"
 
-    const [isLogin, setisLogin] = useState(false)
+    const [isLogin, setisLogin] = useState({
+        iS:false,
+        username:""
+    })
     const [tasks, settasks] = useState([])
+    const [temptasks, settemptasks] = useState([])
 
     const [alert, setalert] = useState({
         isAlert:false,
         type:"danger",
         message:"shdfkjdhfk"
     })
+
+    
 
 
     // Requirements
@@ -78,6 +85,22 @@ const ContextStates=(props)=>{
 
     }
 
+    const compare=(a,b)=>{
+        let date1=a.DueDate;
+        let date2=b.DueDate;
+
+        if(date1===null&&date2===null)return 0;
+        else if(date1===null)return 1;
+        else if(date2===null)return -1;
+
+        date1=new Date(date1).getTime();
+        date2=new Date(date2).getTime();
+
+        return (date1<date2?-1:1);
+
+
+    }
+
 
     const FetchTasks=async()=>{
 
@@ -93,7 +116,14 @@ const ContextStates=(props)=>{
 
 
         if(response.success){
-            settasks(response.user_tasks)
+            // console.log(response.user_tasks);
+
+            let tasks=response.user_tasks
+
+            tasks.sort(compare)
+
+            settasks(tasks)
+            settemptasks(tasks)
         }
         else{
             showAlert('danger',response.errors[0])
@@ -205,13 +235,40 @@ const ContextStates=(props)=>{
     }
 
 
+    const completeTask=async(id)=>{
+
+        let response=await fetch(`${host}/tasks/taskcomplete/${id}`,{
+            method:'DELETE',
+            headers:{
+                'jwt_token':localStorage.getItem('jwt_token')
+            }
+        })
+
+        response=await response.json()
+
+        if(response.success){
+            // console.log(response.complete);
+            FetchTasks()
+        }
+        else{
+            showAlert('danger',response.errors[0].msg)
+        }
+
+        
+
+    }
+
+
+
+
+
 
 
 
 
 
     return(
-        <AppContext.Provider value={{capitalise,RegisterUser,isLogin,setisLogin,alert,setalert,showAlert,LoginUser,FetchTasks,tasks,AddTask,DeleteTask,StarTask,updateTask}}>
+        <AppContext.Provider value={{capitalise,RegisterUser,isLogin,setisLogin,alert,setalert,showAlert,LoginUser,FetchTasks,tasks,AddTask,DeleteTask,StarTask,updateTask,temptasks,settemptasks,completeTask}}>
             {props.children}
         </AppContext.Provider>
     )

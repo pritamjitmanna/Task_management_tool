@@ -78,9 +78,15 @@
         position: relative;
     }
 
+    .heaDing tr{
+        box-shadow: none;
+        border-radius: 0px;
+        background: none;
+    }
+
     
 
-    .actual-table td:before{
+    .actual-table tbody tr td:before{
         content: attr(name);
         position: absolute;
         left: 0;
@@ -89,6 +95,11 @@
         font-weight: 600;
         text-align: left;
 
+    }
+
+    .heaDing tr td{
+        padding-left: 0% !important;
+        text-align: left !important;
     }
 
     .editOp{

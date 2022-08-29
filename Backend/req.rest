@@ -91,3 +91,11 @@ jwt_token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJmYmMwNmIwZ
 PUT http://localhost:5000/tasks/startask/62fa685a5b16143a8171556f
 Content-Length: 0
 jwt_token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJmNjgzZjU3N2U0MWU3MTdmZTQ2ZDhiIn0sImlhdCI6MTY2MDU3MzY2OH0.BubuMv9NHVS2rWwHElk9CFNnhEYFiOCrlkQPK81C4V0
+
+###
+
+# Task Completed
+
+DELETE http://localhost:5000/tasks/taskcomplete/630c7ca11f7709f232daa030
+jwt_token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJmNjgzZjU3N2U0MWU3MTdmZTQ2ZDhiIn0sImlhdCI6MTY2MTI2ODAzOX0.hB12G8jjO1iHJTq-3ny3eTO326INyZ6Quhhb-zKGfhE
+

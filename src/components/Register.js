@@ -29,7 +29,11 @@ export default function Register() {
         if(response.success){
 
             localStorage.setItem('jwt_token',response.user.jwt_token)
-            setisLogin(true)
+            localStorage.setItem('username',response.user.username)
+            setisLogin({
+                iS:true,
+                username:response.user.username
+            })
             
             navigate('/dashboard')
             showAlert('success',"Successfully Registered")

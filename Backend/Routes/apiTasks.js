@@ -2,6 +2,7 @@ const express=require('express')
 const Tasks=require('../Database/models/tasks')
 const { body, validationResult }=require('express-validator') 
 const fetchuser=require('../Middleware/fetchuser')
+const Complete = require('../Database/models/completed')
 
 const router=express.Router();
 
@@ -154,6 +155,42 @@ router.put('/startask/:id',fetchuser,async(req,res)=>{
     } catch (error) {
         res.status(500).send({success:false,errors:[{msg:"Internal Server Error"}]})
     }
+
+})
+
+// ROUTE 5:COMPLETE A TASK http://localhost:5000/tasks/taskcomplete/:id Login Required
+
+
+router.delete('/taskcomplete/:id',fetchuser,async(req,res)=>{
+
+    try {
+
+        let taskId=req.params.id;
+
+        let task=await Tasks.findById(taskId)
+
+        if(!task)res.status(400).json({success:false,errors:[{msg:"Use Valid Credentials"}]})
+
+        if(task.user.toString()!==req.user.id.toString())res.status(400).json({success:false,errors:[{msg:"Use Valid Authentication"}]})
+
+        let {user,title,description,DueDate}=task
+
+        // console.log(user);
+
+        let complete=await Complete.create({
+            user,title,description,DueDate
+
+        })
+
+        let temp=await Tasks.findByIdAndDelete(taskId)
+
+        res.status(200).json({success:true,complete})
+
+        
+    } catch  {
+        res.status(501).json({success:false,errors:[{msg:"Internal Server Error"}]})
+    }
+
 
 })
 

@@ -7,14 +7,17 @@ import AddTask from './AddTask'
 import { useEffect } from 'react'
 import { useContext } from 'react'
 import AppContext from '../ContextStates/AppContext'
+import { useNavigate } from 'react-router-dom'
 
 export default function TaskList() {
 
-    const {FetchTasks,tasks} = useContext(AppContext)
+    const {FetchTasks,temptasks,isLogin,tasks} = useContext(AppContext)
+    const navigate=useNavigate()
 
 
 
     const [addTaskVis, setaddTaskVis] = useState('none')
+
 
     
 
@@ -25,8 +28,12 @@ export default function TaskList() {
         else setaddTaskVis('none')
     }
 
+
+    
+
     useEffect(() => {
-      FetchTasks()
+        if(localStorage.getItem('jwt_token')!==null)FetchTasks()
+        else navigate('/')
     // eslint-disable-next-line
     }, [])
     
@@ -61,23 +68,23 @@ export default function TaskList() {
 
                         </tr>
                     </thead>
-                    <tbody>
+                    {<tbody className='heaDing'>
                         <tr>
                             <td colSpan={5}>Important</td>
                         </tr>
-                    </tbody>
+                    </tbody>}
                     <tbody>
                         {tasks.map((element,index)=>{
                             if(element.starred)return <Taskcard key={element._id} id={element._id} starred={element.starred} index={index+1} title={element.title} description={element.description} due_date={element.DueDate}/>
                         })}
                     </tbody>
-                    <tbody>
+                    <tbody className='heaDing'>
                         <tr>
                             <td colSpan={5}>All</td>
                         </tr>
                     </tbody>
                     <tbody>
-                        {tasks.map((element,index)=>{
+                        {temptasks.map((element,index)=>{
                             return <Taskcard key={element._id} id={element._id} starred={element.starred} index={index+1} title={element.title} description={element.description} due_date={element.DueDate}/>
                         })}
                     </tbody>

@@ -7,10 +7,13 @@ export default function AddTask(props) {
     const {AddTask,updateTask} = useContext(AppContext)
 
 
+
     const [dateType, setdateType] = useState("text")
 
 
+
     const [task, settask] = useState(props.inputValues)
+    
 
     const onFocusClick=()=>{
         setdateType('datetime-local')
@@ -18,6 +21,7 @@ export default function AddTask(props) {
 
     const onBlurClick=()=>{
         setdateType('text')
+
     }
 
     const handleAdd=(e,taskId)=>{
@@ -25,11 +29,13 @@ export default function AddTask(props) {
         e.preventDefault();
 
         if(!props.isEdit){
-            AddTask(task.title,task.description,task.DueDate)
+            let now=new Date(task.DueDate)
+            AddTask(task.title,task.description,now)
             settask(props.inputValues)
         }
         else{
-            updateTask(task.title,task.description,task.DueDate,props.id)
+            let now=new Date(task.DueDate)
+            updateTask(task.title,task.description,now,props.id)
         }
 
         
@@ -53,10 +59,10 @@ export default function AddTask(props) {
                 <textarea className="form-control" value={task.description}  name='description' placeholder="Enter Description" id="floatingTextarea2" rows={2} onChange={onchange}></textarea>
             </div>
             <div className="col-sm">
-                <input placeholder="Select Due date" value={task.DueDate}  name='DueDate' type={dateType} onFocus={onFocusClick} onBlur={onBlurClick} className="form-control" onChange={onchange}/>
+                <input placeholder="Select Due date" value={task.DueDate} name='DueDate' type={dateType} onFocus={onFocusClick} onBlur={onBlurClick} className="form-control" onChange={onchange} min={dateType==='datetime-local'?`${new Date(new Date().getTime()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,16)}`:""}/>
             </div>
             <div className="col-sm text-center">
-                <button className="btn btn-primary w-100">Add</button>
+                <button className="btn btn-primary w-100">{props.isEdit?"Update":"Add"}</button>
             </div>
         </form>
     </div>
