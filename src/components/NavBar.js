@@ -3,12 +3,15 @@ import '../css/custom.css'
 import { Link, useNavigate } from "react-router-dom";
 import { useContext } from 'react';
 import AppContext from '../ContextStates/AppContext';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 
 export default function NavBar() {
 
     const {isLogin,setisLogin,tasks,settemptasks} = useContext(AppContext)
     const navigate=useNavigate()
+    
 
     const handleLogout=(e)=>{
         e.preventDefault()
@@ -22,20 +25,23 @@ export default function NavBar() {
         navigate('/')
     }
 
-    const findIndices=(e,word)=>{
-        let ptr=0;
+    const [notification, setnotification] = useState(0)
 
-        let indices=[]
 
-        while(1){
-            let index=word.indexOf(e.target.value,ptr);
-            if(index>-1)indices.push(index)
-            else break;
-            ptr+=word.length
-        }
+    // const findIndices=(e,word)=>{
+    //     let ptr=0;
 
-        return indices
-    }
+    //     let indices=[]
+
+    //     while(1){
+    //         let index=word.indexOf(e.target.value,ptr);
+    //         if(index>-1)indices.push(index)
+    //         else break;
+    //         ptr+=word.length
+    //     }
+
+    //     return indices
+    // }
 
     const handleOnChange=(e)=>{
         let temp=[]
@@ -45,6 +51,46 @@ export default function NavBar() {
 
         settemptasks(temp);
     }
+    
+
+    useEffect(() => {
+        
+        const interval = setInterval(() => {
+          checkTime()
+        }, 1000);
+        return () => clearInterval(interval);
+        // console.log("render");
+      }, [tasks]);                          //We need to give temptasks here. That because when the temptask state changes then use effect is again rendered else we cannot see the change in the notification bar if we enter the duedate within the required limit.
+
+      
+
+    const ifWithin=(loc)=>{
+        if(loc===null)return 0;
+        // console.log(loc);
+        loc=new Date(loc).getTime()
+        let now=new Date().getTime()
+
+
+
+        if(loc-now<=3600000)return 1;
+        return 0;
+    }
+
+
+    const checkTime=()=>{
+        let value=0
+
+        tasks.map(element=>{
+            if(ifWithin(element.DueDate)===1)value=value+1;
+            return 0;
+        })
+
+        setnotification(value)
+    }
+
+
+
+    
 
 
   return (
@@ -65,9 +111,13 @@ export default function NavBar() {
                     
                 </ul>
                 
-                {isLogin.iS&&<div className="nav-item dropdown me-2">
+                {isLogin.iS&&<div className="nav-item dropdown me-4">
                     <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         {isLogin.username}
+                        {<span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id='tooltip'>
+                            {notification<=99?notification:`${notification}+`}
+                            <span className="tooltiptext">Approaching deadline</span>
+                        </span>}
                     </a>
                     <ul className="dropdown-menu">
                             <li><Link className="dropdown-item" aria-current="page" to="/dashboard">Dashboard</Link></li>

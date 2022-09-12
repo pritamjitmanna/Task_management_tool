@@ -32,6 +32,8 @@ export default function Taskcard(props) {
 
     const [colorToTime, setcolorToTime] = useState("green")
 
+    const [timeLeft, settimeLeft] = useState('-')
+
 
     const deff=()=>{
       if(props.starred)setstarred("starred")
@@ -39,8 +41,12 @@ export default function Taskcard(props) {
 
     useEffect(() => {
       deff()
+      const interval=setInterval(() => {
+        changeLocal()
+      }, 0);
+
+      return ()=>clearInterval(interval)
       // eslint-disable-next-line
-      
     })
 
 
@@ -49,8 +55,9 @@ export default function Taskcard(props) {
     const checkIfWithinDayOrWeek=(now,loc)=>{
       let millisecondsInWeek=7*24*3600*1000;
 
-      if(new Date(loc).getDate()-new Date(now).getDate()==0)return 0;
-      else if(new Date(loc).getDate()-new Date(now).getDate()==1)return 1;
+
+      if(new Date(loc).getDate()-new Date(now).getDate()===0)return 0;
+      else if(new Date(loc).getDate()-new Date(now).getDate()===1)return 1;
       if(loc-now<=millisecondsInWeek)return 2;
       return 3;
     }
@@ -75,6 +82,22 @@ export default function Taskcard(props) {
         let now=new Date().getTime()
 
         let loc=new Date(props.due_date).getTime()
+
+        // console.log(loc);
+        // console.log(now);
+
+        let lefttimeMilli=loc-now
+
+        let secondsLeft=Math.floor(lefttimeMilli/1000)
+        let minsLeft=Math.floor(secondsLeft/60);
+        secondsLeft%=60
+
+        let hoursLeft=Math.floor(minsLeft/60);
+        minsLeft%=60
+
+        settimeLeft(`${hoursLeft}:${minsLeft}:${secondsLeft}`)
+        
+
   
         let flag=checkIfWithinDayOrWeek(now,loc)
   
@@ -111,9 +134,7 @@ export default function Taskcard(props) {
     const [timeDate, settimeDate] = useState("")
 
 
-    setInterval(() => {
-      changeLocal()
-    }, 0);
+    
 
 
     
@@ -141,7 +162,8 @@ export default function Taskcard(props) {
             <td name='SNo'>{props.index}</td>
             <td name='Title'>{props.title}</td>
             <td name='Description'>{props.description.length===0?'-':props.description}</td>
-            <td name='DueDate' style={{color:colorToTime}}>{timeDate}</td>
+            <td name="Time Left">{timeLeft}</td>
+            <td name='Due Date' style={{color:colorToTime}}>{timeDate}</td>
             <td className="dropdown">
               <a className="nav-link dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <i className="fas fa-ellipsis-v"></i>

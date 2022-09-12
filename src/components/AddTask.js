@@ -24,7 +24,7 @@ export default function AddTask(props) {
 
     }
 
-    const handleAdd=(e,taskId)=>{
+    const handleAdd=(e)=>{
 
         e.preventDefault();
 

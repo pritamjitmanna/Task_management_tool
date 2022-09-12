@@ -63,6 +63,17 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     background-color: aqua;
 }
 
+.tooltiptext{
+    position: absolute;
+    color: black;
+    z-index: -1;
+    visibility: hidden;
+}
+
+#tooltip:hover .tooltiptext{
+    visibility: visible;
+}
+
 
 
 
@@ -297,6 +308,8 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 
 
 
+
+
 .actual-table thead th:nth-child(1),td:nth-child(1){
     width: 5%;
 }
@@ -304,25 +317,19 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     width: 14%;
 }
 .actual-table thead th:nth-child(3),td:nth-child(3){
-    width: 50%;
+    width: 48%;
 }
 .actual-table thead th:nth-child(4),td:nth-child(4){
+    width: 8%;
+}
+.actual-table thead th:nth-child(5),td:nth-child(4){
     width: 20%;
 }
-.actual-table thead th:nth-child(5),td:nth-child(5){
+.actual-table thead th:nth-child(6),td:nth-child(5){
     width: 1%;
 }
 
 
-.actual-table td button:nth-child(1){
-    background-color: #0298cf;
-    margin: 0px 2px ;
-}
-
-.actual-table td button:nth-child(2){
-    background-color: #f80000;
-    margin: 0px 2px ;
-}
 
 .pagination{
     display: flex;
@@ -371,4 +378,13 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     border-left: 1px solid rgb(88 163 238 / 63%) !important;
     border-right: 1px solid rgb(88 163 238 / 63%) !important;
     border-radius: 50% 50% 0 0;
+}
+
+
+
+
+/*---------------------Analytics--------------------*/
+
+.analytics{
+    border: 1px solid black;
 }
