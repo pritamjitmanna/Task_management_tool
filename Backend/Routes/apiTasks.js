@@ -3,6 +3,7 @@ const Tasks=require('../Database/models/tasks')
 const { body, validationResult }=require('express-validator') 
 const fetchuser=require('../Middleware/fetchuser')
 const Complete = require('../Database/models/completed')
+const Analytics=require("../Database/models/Analytics")
 
 const router=express.Router();
 
@@ -124,9 +125,13 @@ router.get('/fetchtasks',fetchuser,async(req,res)=>{
         
         let user_tasks=await Tasks.find({user:req.user.id});
 
+        let complete_tasks=await Complete.find({user:req.user.id})
+
+        let analyts=await Analytics.find({user:req.user.id})
+
         // console.log(req.user.id);
 
-        res.status(200).json({success:true,user_tasks})
+        res.status(200).json({success:true,user_tasks,complete_tasks,analyts})
 
 
     } catch (error) {
@@ -158,7 +163,7 @@ router.put('/startask/:id',fetchuser,async(req,res)=>{
 
 })
 
-// ROUTE 5:COMPLETE A TASK http://localhost:5000/tasks/taskcomplete/:id Login Required
+// ROUTE 6:COMPLETE A TASK http://localhost:5000/tasks/taskcomplete/:id Login Required
 
 
 router.delete('/taskcomplete/:id',fetchuser,async(req,res)=>{
@@ -188,6 +193,43 @@ router.delete('/taskcomplete/:id',fetchuser,async(req,res)=>{
 
         
     } catch  {
+        res.status(501).json({success:false,errors:[{msg:"Internal Server Error"}]})
+    }
+
+
+})
+
+
+// ROUTE 7: FOR ANALYTICS PURPOSE http://localhost:5000/tasks/actioncount/ Login Required
+
+router.put('/actioncount',fetchuser,async(req,res)=>{
+
+    try {
+        
+        let userId=req.user.id
+
+
+        let analytics
+
+        let user=await Analytics.findOne({user:userId})
+        if(user===null)user=await Analytics.create({
+            user:userId
+        })
+
+        if(req.body.operation==='added')analytics=await Analytics.updateOne({user:userId},{$inc:{added:1}},{new:true})
+        
+        else if(req.body.operation==='deleted')analytics=await Analytics.updateOne({user:userId},{$inc:{deleted:1}},{new:true})
+        else analytics=await Analytics.updateOne({user:userId},{$inc:{completed:1}},{new:true})
+
+
+
+
+        res.status(200).json({success:true,analytics})
+
+
+        
+
+    } catch {
         res.status(501).json({success:false,errors:[{msg:"Internal Server Error"}]})
     }
 

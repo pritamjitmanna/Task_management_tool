@@ -31,12 +31,12 @@ export default function TaskList(props) {
             {tasks.length?<table className='actual-table'>
                 <thead>
                     <tr>
-                        <th>S No</th>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Time Left</th>
-                        <th>Due Date</th>
-                        <th></th>
+                        <th className='cd-5'>S No</th>
+                        <th className='cd-14'>Title</th>
+                        <th className='cd-48'>Description</th>
+                        <th className='cd-8'>Time Left</th>
+                        <th className='cd-20'>Due Date</th>
+                        <th className='cd-1'></th>
                     </tr>
                 </thead>
                 {<tbody className='heaDing'>

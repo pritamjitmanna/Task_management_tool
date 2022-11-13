@@ -99,3 +99,12 @@ jwt_token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJmNjgzZjU3N
 DELETE http://localhost:5000/tasks/taskcomplete/630c7ca11f7709f232daa030
 jwt_token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJmNjgzZjU3N2U0MWU3MTdmZTQ2ZDhiIn0sImlhdCI6MTY2MTI2ODAzOX0.hB12G8jjO1iHJTq-3ny3eTO326INyZ6Quhhb-zKGfhE
 
+###
+
+PUT http://localhost:5000/tasks/actioncount/
+Content-Type: application/json
+jwt_token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJmNjgzZjU3N2U0MWU3MTdmZTQ2ZDhiIn0sImlhdCI6MTY2MzE3MjEzNH0.j2-O3jOoLUMg8tcLq9ZL4Cj58vAd7oaLvJuBwiyd6aI
+
+{
+    "operation":"deleted"
+}

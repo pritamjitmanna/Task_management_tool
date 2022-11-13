@@ -59,7 +59,7 @@ export default function AddTask(props) {
                 <textarea className="form-control" value={task.description}  name='description' placeholder="Enter Description" id="floatingTextarea2" rows={2} onChange={onchange}></textarea>
             </div>
             <div className="col-sm">
-                <input placeholder="Select Due date" value={task.DueDate} name='DueDate' type={dateType} onFocus={onFocusClick} onBlur={onBlurClick} className="form-control" onChange={onchange} min={dateType==='datetime-local'?`${new Date(new Date().getTime()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,16)}`:""}/>
+                <input placeholder="Select Due date" value={task.DueDate} name='DueDate' type={dateType} onFocus={onFocusClick} onBlur={onBlurClick} className="form-control" onChange={onchange} min={dateType==='datetime-local'?`${new Date(new Date().getTime()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,16)}`:""}/>     {/*The minimum value is found here by getting the current time in the local time. Here the getTimeZoneOffset returns the difference between GMT and local in minutes, so thus change it to milliseconds as the getTime returns in milliseconds. Then i change it to the date time format and then take the date and time by slicing */}
             </div>
             <div className="col-sm text-center">
                 <button className="btn btn-primary w-100">{props.isEdit?"Update":"Add"}</button>

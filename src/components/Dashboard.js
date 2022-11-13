@@ -46,15 +46,15 @@ export default function Dashboard() {
                           </div>
                         </div>
                         
-                          <div>
+                        {pageType==='tasklist'&&<div>
                               <button className="btn-user hover-custom transition-custom" onClick={handleAddClick}>+ Add New</button>
-                          </div>
+                          </div>}
                       </div>
-                      <AddTask addTaskVis={addTaskVis} inputValues={{
+                      {pageType==='tasklist'&&<AddTask addTaskVis={addTaskVis} inputValues={{
                           title:"",
                           description:"",
                           DueDate:""
-                      }} isEdit={false}/>
+                      }} isEdit={false}/>}
                   </div>
 
                   <div className="table-section">

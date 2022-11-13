@@ -9,6 +9,8 @@ export default function Taskcard(props) {
 
     // console.log(props.title);
 
+
+
     const {DeleteTask,StarTask,completeTask} = useContext(AppContext)
 
     const handleDel=(e)=>{
@@ -23,10 +25,9 @@ export default function Taskcard(props) {
 
       StarTask(props.id,setstarred,starred);
 
-
-      
-
     }
+
+    const [isRunningLate, setisRunningLate] = useState(false)
 
     const [starred, setstarred] = useState("")
 
@@ -56,9 +57,9 @@ export default function Taskcard(props) {
       let millisecondsInWeek=7*24*3600*1000;
 
 
-      if(new Date(loc).getDate()-new Date(now).getDate()===0)return 0;
-      else if(new Date(loc).getDate()-new Date(now).getDate()===1)return 1;
-      if(loc-now<=millisecondsInWeek)return 2;
+      if(Math.abs(new Date(loc).getDate()-new Date(now).getDate())===0)return 0;
+      else if(Math.abs(new Date(loc).getDate()-new Date(now).getDate())===1)return 1;
+      if(Math.abs(loc-now)<=millisecondsInWeek)return 2;
       return 3;
     }
 
@@ -86,7 +87,10 @@ export default function Taskcard(props) {
         // console.log(loc);
         // console.log(now);
 
-        let lefttimeMilli=loc-now
+        let lefttimeMilli=Math.abs(loc-now)
+
+        if(now>loc)setisRunningLate(true)
+        else setisRunningLate(false)
 
         let secondsLeft=Math.floor(lefttimeMilli/1000)
         let minsLeft=Math.floor(secondsLeft/60);
@@ -98,9 +102,8 @@ export default function Taskcard(props) {
         settimeLeft(`${hoursLeft}:${minsLeft}:${secondsLeft}`)
         
 
-  
         let flag=checkIfWithinDayOrWeek(now,loc)
-  
+
         if(flag===0){
           local="Today"
           local=local.concat(" ")
@@ -119,6 +122,10 @@ export default function Taskcard(props) {
           local=local.concat(new Date(props.due_date).toLocaleTimeString())
         }
         else local=new Date(props.due_date).toLocaleString()
+        
+        if(isRunningLate)setcolorToTime('red')
+  
+        
   
         // console.log(local);
         
@@ -159,12 +166,13 @@ export default function Taskcard(props) {
 
     
         <tr>
-            <td name='SNo'>{props.index}</td>
-            <td name='Title'>{props.title}</td>
-            <td name='Description'>{props.description.length===0?'-':props.description}</td>
-            <td name="Time Left">{timeLeft}</td>
-            <td name='Due Date' style={{color:colorToTime}}>{timeDate}</td>
-            <td className="dropdown">
+            <td name='SNo' className='cd-5'>{props.index}</td>
+            <td name='Title' className='cd-14'>{props.title}</td>
+            <td name='Description' className='cd-48'>{props.description.length===0?'-':props.description}</td>
+            {!isRunningLate&&<td name="Time Left" className='cd-8'>{timeLeft}</td>}
+            {isRunningLate&&<td name="Time Left" className='cd-8'>Running Late By {timeLeft}</td>}
+            <td name='Due Date' className='cd-20' style={{color:colorToTime}}>{timeDate}</td>
+            <td className="dropdown cd-1">
               <a className="nav-link dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <i className="fas fa-ellipsis-v"></i>
               </a>

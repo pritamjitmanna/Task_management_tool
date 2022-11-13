@@ -13,7 +13,9 @@ const ContextStates=(props)=>{
         username:""
     })
     const [tasks, settasks] = useState([])
+    const [completetasks, setcompletetasks] = useState([])
     const [temptasks, settemptasks] = useState([])
+    const [analyts, setanalyts] = useState([])
 
     
 
@@ -122,11 +124,33 @@ const ContextStates=(props)=>{
             // console.log(response.user_tasks);
 
             let tasks=response.user_tasks
+            let complete_tasks=response.complete_tasks
+            let analytss=response.analyts
+
+
+            // console.log(analyts);
 
             tasks.sort(compare)
 
             settasks(tasks)
             settemptasks(tasks)
+
+            setcompletetasks(complete_tasks)
+            setanalyts([{
+                name: "Added",
+                value: Number(analytss[0].added),
+                fill:"blue"
+              },
+              {
+                name: "Deleted",
+                value: Number(analytss[0].deleted),
+                fill:"red"
+              },
+              {
+                name: "Completed",
+                value: Number(analytss[0].completed),
+                fill:"green"
+              }])
         }
         else{
             showAlert('danger',response.errors[0])
@@ -150,9 +174,15 @@ const ContextStates=(props)=>{
 
         response=await response.json();
 
-        // console.log(response);
+        let actionBody={
+            operation:'added'
+        }
 
-        if(response.success){
+        let ActionRes=await ActionCount(actionBody)
+
+        
+
+        if(ActionRes.success&&response.success){
             showAlert('success','Task Added Successfully')
             FetchTasks()
 
@@ -175,7 +205,13 @@ const ContextStates=(props)=>{
 
         response=await response.json()
 
-        if(response.success){
+        let actionbody={
+            operation:"deleted"
+        }
+
+        let ActionRes=await ActionCount(actionbody)
+
+        if(response.success&&ActionRes.success){
             showAlert('success','Task Deleted Successfully')
             FetchTasks()
         }
@@ -249,7 +285,13 @@ const ContextStates=(props)=>{
 
         response=await response.json()
 
-        if(response.success){
+        let actionbody={
+            operation:"completed"
+        }
+
+        let ActionRes=await ActionCount(actionbody)
+
+        if(response.success&&ActionRes.success){
             // console.log(response.complete);
             FetchTasks()
         }
@@ -262,7 +304,22 @@ const ContextStates=(props)=>{
     }
 
 
+    const ActionCount=async(data)=>{
 
+        let ActionRes=await fetch(`${host}/tasks/actioncount`,{
+            method:'PUT',
+            headers:{
+                'Content-Type':'application/json',
+                'jwt_token':localStorage.getItem('jwt_token')
+            },
+            body:JSON.stringify(data)
+        })
+
+        ActionRes=await ActionRes.json()
+
+        return ActionRes
+
+    }
 
 
 
@@ -271,7 +328,7 @@ const ContextStates=(props)=>{
 
 
     return(
-        <AppContext.Provider value={{capitalise,RegisterUser,isLogin,setisLogin,alert,setalert,showAlert,LoginUser,FetchTasks,tasks,AddTask,DeleteTask,StarTask,updateTask,temptasks,settemptasks,completeTask}}>
+        <AppContext.Provider value={{capitalise,RegisterUser,isLogin,setisLogin,alert,setalert,showAlert,LoginUser,FetchTasks,tasks,AddTask,DeleteTask,StarTask,updateTask,temptasks,settemptasks,completeTask,completetasks,setcompletetasks,analyts}}>
             {props.children}
         </AppContext.Provider>
     )
