@@ -81,7 +81,7 @@ const ContextStates=(props)=>{
                 'Content-Type':'application/json'
             },
             body:JSON.stringify({email,password})
-        })
+        });
 
         response=response.json();
 

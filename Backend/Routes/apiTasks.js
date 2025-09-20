@@ -33,9 +33,9 @@ router.post('/addtask',fetchuser,[
 
         // console.log(req.user.id);
 
-        res.status(200).json({success:true,task})
+        return res.status(200).json({success:true,task})
     } catch (error) {
-        res.status(500).send({success:false,errors:[{msg:"Internal Server Error"}]})
+        return res.status(500).send({success:false,errors:[{msg:"Internal Server Error"}]})
     }
 
     
@@ -78,9 +78,9 @@ router.put('/updatetask/:id',fetchuser,[
 
         task=await Tasks.findByIdAndUpdate(taskId,{$set:updateTask},{new:true})
 
-        res.status(200).json({success:true,task})
+        return res.status(200).json({success:true,task})
     } catch (error) {
-        res.status(500).send({success:false,errors:[{msg:"Internal Server Error"}]})
+        return res.status(500).send({success:false,errors:[{msg:"Internal Server Error"}]})
     }
 
 
@@ -109,9 +109,9 @@ router.delete('/deletetask/:id',fetchuser,async(req,res)=>{
 
         task=await Tasks.findByIdAndDelete(taskId)
 
-        res.status(200).json({success:true,task})
+        return res.status(200).json({success:true,task})
     } catch (error) {
-        res.status(500).send({success:false,errors:[{msg:"Internal Server Error"}]})
+        return res.status(500).send({success:false,errors:[{msg:"Internal Server Error"}]})
     }
 
 
@@ -131,11 +131,11 @@ router.get('/fetchtasks',fetchuser,async(req,res)=>{
 
         // console.log(req.user.id);
 
-        res.status(200).json({success:true,user_tasks,complete_tasks,analyts})
+        return res.status(200).json({success:true,user_tasks,complete_tasks,analyts})
 
 
     } catch (error) {
-        res.status(500).send({success:false,errors:[{msg:"Internal Server Error"}]})
+        return res.status(500).send({success:false,errors:[{msg:"Internal Server Error"}]})
     }
 
 
@@ -155,10 +155,10 @@ router.put('/startask/:id',fetchuser,async(req,res)=>{
 
         task.save();
 
-        res.status(200).json({success:true,task})
+        return res.status(200).json({success:true,task})
 
     } catch (error) {
-        res.status(500).send({success:false,errors:[{msg:"Internal Server Error"}]})
+        return res.status(500).send({success:false,errors:[{msg:"Internal Server Error"}]})
     }
 
 })
@@ -174,9 +174,9 @@ router.delete('/taskcomplete/:id',fetchuser,async(req,res)=>{
 
         let task=await Tasks.findById(taskId)
 
-        if(!task)res.status(400).json({success:false,errors:[{msg:"Use Valid Credentials"}]})
+        if(!task)return res.status(400).json({success:false,errors:[{msg:"Use Valid Credentials"}]})
 
-        if(task.user.toString()!==req.user.id.toString())res.status(400).json({success:false,errors:[{msg:"Use Valid Authentication"}]})
+        if(task.user.toString()!==req.user.id.toString())return res.status(400).json({success:false,errors:[{msg:"Use Valid Authentication"}]})
 
         let {user,title,description,DueDate}=task
 
@@ -189,11 +189,11 @@ router.delete('/taskcomplete/:id',fetchuser,async(req,res)=>{
 
         let temp=await Tasks.findByIdAndDelete(taskId)
 
-        res.status(200).json({success:true,complete})
+        return res.status(200).json({success:true,complete})
 
         
     } catch  {
-        res.status(501).json({success:false,errors:[{msg:"Internal Server Error"}]})
+        return res.status(501).json({success:false,errors:[{msg:"Internal Server Error"}]})
     }
 
 
@@ -224,13 +224,13 @@ router.put('/actioncount',fetchuser,async(req,res)=>{
 
 
 
-        res.status(200).json({success:true,analytics})
+        return res.status(200).json({success:true,analytics})
 
 
         
 
     } catch {
-        res.status(501).json({success:false,errors:[{msg:"Internal Server Error"}]})
+        return res.status(501).json({success:false,errors:[{msg:"Internal Server Error"}]})
     }
 
 

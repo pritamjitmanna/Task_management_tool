@@ -8,7 +8,7 @@ const router=express.Router()
 const User=require('../Database/models/userData')
 
 
-const JWT_SECRET="secret"
+const JWT_SECRET=process.env.JWT_SECRET
 
 
 const jwt_auth=(user)=>{
@@ -60,10 +60,10 @@ router.post("/register",[
 
       user=jwt_auth(user);
 
-      res.status(200).send({success:true,user});
+      return res.status(200).send({success:true,user});
     }
     catch(e){
-      res.status(500).send({success:false,errors:[{msg:"Internal Server Error"}]})
+      return res.status(500).send({success:false,errors:[{msg:"Internal Server Error"}]})
     }
 
 
@@ -86,14 +86,15 @@ router.post('/login',[
     try {
 
       const {email,password}=req.body
+      
 
       let user=await User.findOne({email});
 
-      if(!user)res.status(400).send({success:false,errors:[{msg:"Email and Password Does Not match"}]});
+      if(!user)return res.status(400).send({success:false,errors:[{msg:"Email and Password Does Not match"}]});
 
       let isAuth=await bcrypt.compare(password,user.password)
 
-      if(!isAuth)res.status(400).send({success:false,errors:[{msg:"Email and Password Does Not match"}]})
+      if(!isAuth)return res.status(400).send({success:false,errors:[{msg:"Email and Password Does Not match"}]})
 
       user=jwt_auth(user);
 
@@ -105,7 +106,7 @@ router.post('/login',[
 
       
     } catch (error) {
-      res.status(500).send({success:false,errors:[{msg:"Internal Server Error"}]})
+      return res.status(500).send({success:false,errors:[{msg:"Internal Server Error"}]})
     }
 })
 
@@ -120,9 +121,9 @@ router.get('/fetchuser',fetchuser,async(req,res)=>{
     
     let user=await User.findById(req.user.id);
   
-    res.status(200).json({success:true,user})
+    return res.status(200).json({success:true,user})
   } catch (error) {
-    res.status(500).json({success:false,errors:[{msg:"Internal Server Error"}]})
+    return res.status(500).json({success:false,errors:[{msg:"Internal Server Error"}]})
   }
 
 

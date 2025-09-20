@@ -10,7 +10,6 @@ export default function Home() {
   return (
     <div style={{overflow:'hidden'}}>
 
-   
       <section className='d-flex flex-column text-center justify-content-center align-items-center w-2' id='home-section'>
           <h1>taskI</h1>
           <div className="container">

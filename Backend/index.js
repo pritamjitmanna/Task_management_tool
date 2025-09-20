@@ -6,7 +6,7 @@ const cors=require('cors')
 
 // Necessary constants
 
-const PORT=5000
+const PORT=process.env.PORT || 5000;
 const HTTP="127.0.0.1";
 
 // Starting mongo

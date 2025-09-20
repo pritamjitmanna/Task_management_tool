@@ -3,7 +3,7 @@
 
 # Register a user
 
-POST  http://localhost:5000/users/register
+POST  {{$dotenv HOST_URL}}:{{$dotenv PORT}}/users/register
 Content-Type: application/json
 
 {
@@ -18,7 +18,7 @@ Content-Type: application/json
 
 # Login 
 
-POST http://localhost:5000/users/login
+POST {{$dotenv HOST_URL}}:{{$dotenv PORT}}/users/login
 Content-Type: application/json
 
 {
@@ -32,8 +32,8 @@ Content-Type: application/json
 
 # FetchUser Details
 
-GET http://localhost:5000/users/fetchuser
-jwt_token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJmNjgxOTQ1N2JiMzBiYjAyY2MzMWU0In0sImR0IjoiYWRzcyIsImlhdCI6MTY2MDMyMjE5Nn0.odQPbla8xI2VFj36Fe6oaDM4PUp2-RJ94kZDhrsfuRY
+GET {{$dotenv HOST_URL}}:{{$dotenv PORT}}/users/fetchuser
+jwt_token:{{$dotenv JWT_TOKEN}}
 
 
 ###
@@ -41,9 +41,9 @@ jwt_token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJmNjgxOTQ1N
 
 # Add Task
 
-POST http://localhost:5000/tasks/addtask
+POST {{$dotenv HOST_URL}}:{{$dotenv PORT}}/tasks/addtask
 Content-Type: application/json
-jwt_token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJmNjgzZjU3N2U0MWU3MTdmZTQ2ZDhiIn0sImlhdCI6MTY2MDU3MzY2OH0.BubuMv9NHVS2rWwHElk9CFNnhEYFiOCrlkQPK81C4V0
+jwt_token:{{$dotenv JWT_TOKEN}}
 
 {
     "title":"My First Taskttee",
@@ -57,9 +57,9 @@ jwt_token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJmNjgzZjU3N
 
 # Update Task
 
-PUT http://localhost:5000/tasks/updatetask/62f7cb0e831b554520cf860f
+PUT {{$dotenv HOST_URL}}:{{$dotenv PORT}}/tasks/updatetask/62f7cb0e831b554520cf860f
 Content-Type: application/json
-jwt_token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJmNjgxOTQ1N2JiMzBiYjAyY2MzMWU0In0sImR0IjoiYWRzcyIsImlhdCI6MTY2MDMyMjE5Nn0.odQPbla8xI2VFj36Fe6oaDM4PUp2-RJ94kZDhrsfuRY
+jwt_token:{{$dotenv JWT_TOKEN}}
 
 {
     "title":"My First Task",
@@ -72,38 +72,38 @@ jwt_token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJmNjgxOTQ1N
 
 # Delete A task
 
-DELETE http://localhost:5000/tasks/deletetask/62f7cb0e831b554520cf860f
-jwt_token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJmNjgxOTQ1N2JiMzBiYjAyY2MzMWU0In0sImR0IjoiYWRzcyIsImlhdCI6MTY2MDMyMjE5Nn0.odQPbla8xI2VFj36Fe6oaDM4PUp2-RJ94kZDhrsfuRY
+DELETE {{$dotenv HOST_URL}}:{{$dotenv PORT}}/tasks/deletetask/62f7cb0e831b554520cf860f
+jwt_token:{{$dotenv JWT_TOKEN}}
 
 
 ###
 
 # Fetch Tasks
 
-GET http://localhost:5000/tasks/fetchtasks
-jwt_token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJmYmMwNmIwZmVmMzI1ZDM1NzA5ODk0In0sImlhdCI6MTY2MDY2NTk2M30.Zzpk3Gs9kyOrGICmz4tQSZAa2xsrywUL1zss0V8zVDY
+GET {{$dotenv HOST_URL}}:{{$dotenv PORT}}/tasks/fetchtasks
+jwt_token:{{$dotenv JWT_TOKEN}}
 
 
 ###
 
 # Star a Task
 
-PUT http://localhost:5000/tasks/startask/62fa685a5b16143a8171556f
+PUT {{$dotenv HOST_URL}}:{{$dotenv PORT}}/tasks/startask/62fa685a5b16143a8171556f
 Content-Length: 0
-jwt_token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJmNjgzZjU3N2U0MWU3MTdmZTQ2ZDhiIn0sImlhdCI6MTY2MDU3MzY2OH0.BubuMv9NHVS2rWwHElk9CFNnhEYFiOCrlkQPK81C4V0
+jwt_token:{{$dotenv JWT_TOKEN}}
 
 ###
 
 # Task Completed
 
-DELETE http://localhost:5000/tasks/taskcomplete/630c7ca11f7709f232daa030
-jwt_token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJmNjgzZjU3N2U0MWU3MTdmZTQ2ZDhiIn0sImlhdCI6MTY2MTI2ODAzOX0.hB12G8jjO1iHJTq-3ny3eTO326INyZ6Quhhb-zKGfhE
+DELETE {{$dotenv HOST_URL}}:{{$dotenv PORT}}/tasks/taskcomplete/630c7ca11f7709f232daa030
+jwt_token:{{$dotenv JWT_TOKEN}}
 
 ###
 
-PUT http://localhost:5000/tasks/actioncount/
+PUT {{$dotenv HOST_URL}}:{{$dotenv PORT}}/tasks/actioncount/
 Content-Type: application/json
-jwt_token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJmNjgzZjU3N2U0MWU3MTdmZTQ2ZDhiIn0sImlhdCI6MTY2MzE3MjEzNH0.j2-O3jOoLUMg8tcLq9ZL4Cj58vAd7oaLvJuBwiyd6aI
+jwt_token:{{$dotenv JWT_TOKEN}}
 
 {
     "operation":"deleted"
