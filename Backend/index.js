@@ -1,3 +1,4 @@
+require('dotenv').config() // must be first so process.env is populated for other modules
 const express = require('express')
 const app = express()
 const mongoD=require('./Database/mongo')
@@ -6,7 +7,7 @@ const cors=require('cors')
 
 // Necessary constants
 
-const PORT=process.env.PORT || 5000;
+const PORT=process.env.PORT;
 const HTTP="127.0.0.1";
 
 // Starting mongo
