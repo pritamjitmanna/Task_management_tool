@@ -1,0 +1,15 @@
+# Command: docker-compose run --rm -p 3000:3000 npm with the port commented out.
+# or we can use the run service in this file as runner with the port.
+# Full command: docker run --rm -p 3000:3000 -it -v "C:\Users\Pritamjit Manna\Desktop\Project\task_management_tool:/app" -w /app node-js-env start
+
+version: '3.8'
+services:
+  npm:
+    image: node-js-env
+    working_dir: /app
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./:/app
+    # ports:
+    #   - 5000:5000
